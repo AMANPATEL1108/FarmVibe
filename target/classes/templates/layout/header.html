@@ -1,0 +1,111 @@
+<header class="bg-gray-900 text-white py-3" xmlns:th="http://www.w3.org/1999/xhtml" th:fragment="header">
+    <div class="container mx-auto">
+        <div class="flex flex-col md:flex-row items-center justify-between">
+
+            <!-- Logo -->
+            <div class="mb-2 md:mb-0">
+                <a href="/" class="text-white no-underline hover:text-blue-300 transition">
+                    <h1 class="text-2xl font-extrabold tracking-wide">🌾 Farm Vibe</h1>
+                </a>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="flex gap-4 mb-2 md:mb-0">
+                <a href="/"
+                   th:classappend="${activePage == 'home'} ? 'text-blue-400 font-bold' : 'text-white'"
+                   class="hover:text-blue-300 transition px-2 py-1 no-underline">
+                    Home
+                </a>
+                <a href="/pageUrl?page=contact"
+                   th:classappend="${activePage == 'contact'} ? 'text-blue-400 font-bold' : 'text-white'"
+                   class="hover:text-blue-300 transition px-2 py-1 no-underline">
+                    Contact
+                </a>
+                <a href="/pageUrl?page=products"
+                   th:classappend="${activePage == 'products'} ? 'text-blue-400 font-bold' : 'text-white'"
+                   class="hover:text-blue-300 transition px-2 py-1 no-underline">
+                    Products
+                </a>
+                <a href="/pageUrl?page=category"
+                   th:classappend="${activePage == 'category'} ? 'text-blue-400 font-bold' : 'text-white'"
+                   class="hover:text-blue-300 transition px-2 py-1 no-underline">
+                    Category
+                </a>
+                <a href="/pageUrl?page=about"
+                   th:classappend="${activePage == 'about'} ? 'text-blue-400 font-bold' : 'text-white'"
+                   class="hover:text-blue-300 transition px-2 py-1 no-underline">
+                    About
+                </a>
+            </nav>
+
+            <!-- Social + Auth + Profile -->
+            <div class="flex items-center gap-4 relative">
+
+                <!-- Sign In & Register Buttons -->
+                <a href="/pageUrl?page=signing"
+                   th:classappend="${activePage == 'signing'} ? 'text-blue-400 font-bold' : 'text-white'"
+                   class="bg-blue-500 hover:bg-blue-600 text-white text-sm px-4 py-1.5 rounded shadow transition duration-200">
+                    Sign In
+                </a>
+                <a href="/pageUrl?page=register"
+                   th:classappend="${activePage == 'register'} ? 'text-blue-400 font-bold' : 'text-white'"
+                   class="bg-green-500 hover:bg-green-600 text-white text-sm px-4 py-1.5 rounded shadow transition duration-200">
+                    Register
+                </a>
+
+                <!-- Profile Icon + Dropdown -->
+                <div class="relative">
+                    <button id="profileToggle" class="focus:outline-none flex flex-col items-center" aria-haspopup="true" aria-expanded="false" aria-controls="profileDropdown" aria-label="User menu">
+                        <img src="/images/logo/user.png" alt="Profile" class="w-9 h-9 rounded-full border-2 border-white"/>
+                        <p class="text-xs text-white text-center mt-1">Aman</p>
+                    </button>
+
+                    <!-- Dropdown -->
+                    <div id="profileDropdown"
+                         class="absolute right-0 mt-2 bg-white text-black rounded shadow-md hidden z-50 min-w-[160px]"
+                         role="menu" aria-hidden="true">
+                        <a href="/pageUrl?page=profile"
+                           th:classappend="${activePage == 'profile'} ? 'text-blue-400 font-bold' : 'text-black'"
+                           class="block px-4 py-2 hover:bg-gray-100" role="menuitem" tabindex="-1">
+                            Profile
+                        </a>
+                        <a href="/pageUrl?page=order-detail"
+                           th:classappend="${activePage == 'order-detail'} ? 'text-blue-400 font-bold' : 'text-black'"
+                           class="block px-4 py-2 hover:bg-gray-100" role="menuitem" tabindex="-1">
+                            Orders
+                        </a>
+                        <a href="/"
+                           th:classappend="${activePage == 'home'} ? 'text-blue-400 font-bold' : 'text-black'"
+                           class="block px-4 py-2 hover:bg-gray-100" role="menuitem" tabindex="-1">
+                            Log Out
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Dropdown Toggle Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          const toggle = document.getElementById("profileToggle");
+          const dropdown = document.getElementById("profileDropdown");
+
+          toggle.addEventListener("click", function (e) {
+            e.stopPropagation();
+            dropdown.classList.toggle("hidden");
+            // Update aria-expanded for accessibility
+            const expanded = toggle.getAttribute("aria-expanded") === "true";
+            toggle.setAttribute("aria-expanded", !expanded);
+            dropdown.setAttribute("aria-hidden", expanded);
+          });
+
+          document.addEventListener("click", function () {
+            dropdown.classList.add("hidden");
+            toggle.setAttribute("aria-expanded", "false");
+            dropdown.setAttribute("aria-hidden", "true");
+          });
+        });
+    </script>
+</header>

@@ -8,6 +8,7 @@ public class FarmVibeApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(FarmVibeApplication.class, args);
+
 	}
 
 }
